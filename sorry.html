@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>I'm Sorry ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap" rel="stylesheet">
+
+  <style>
+    body,html {
+      margin:0;
+      padding:0;
+      height:100%;
+      font-family:Poppins, sans-serif;
+      overflow:hidden;
+    }
+    body {
+      background:linear-gradient(135deg,#0f2027,#203a43,#444);
+      color:white;
+      position:relative;
+    }
+
+    
+
+    /* RAINDROPS */
+    .raindrops {
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:1;
+    }
+    .drop {
+      position:absolute;
+      width:2px;
+      height:15px;
+      background:rgba(255,255,255,0.8);
+      border-radius:50%;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      0% { transform:translateY(-10vh); opacity:1; }
+      100% { transform:translateY(110vh); opacity:0.3; }
+    }
+
+    /* CONTENT */
+    .screen {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      height:100vh;
+      text-align:center;
+      position:relative;
+      z-index:3; /* on top of rain */
+    }
+    .hidden{display:none;}
+    .avatar {
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background:#fff;
+      padding:8px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,.5)
+    }
+    .avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%
+    }
+    .intro-text {
+      margin-top:20px;
+      font-size:22px;
+      font-weight:600;
+      font-family: "Edu NSW ACT Cursive", cursive;
+    }
+    .arrow {
+      margin-top:20px;
+      font-size:24px;
+      cursor:pointer;
+      animation:bounce 1s infinite
+    }
+    @keyframes bounce {
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+    }
+
+    .wrap{position:relative; z-index:2; width:min(960px,94vw); padding:24px;}
+    .card{
+      background:rgba(255,255,255,.15);
+      backdrop-filter: blur(10px);
+      border-radius:24px;
+      box-shadow:0 20px 80px rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Clouds -->
+  <div class="clouds"></div>
+
+  <!-- Raindrops -->
+  <div class="raindrops" id="raindrops"></div>
+
+  <!-- Intro Screen -->
+  <div id="intro" class="screen">
+    <div class="avatar">
+      <img src="https://raw.githubusercontent.com/the-shivm/Sorry-/refs/heads/main/ba05848aa94062e65b730304a4c20cfb.gif" alt="avatar">
+    </div>
+    <div class="intro-text">Sorry Twinkle</div>
+    <div class="arrow" onclick="showMain()">&gt;&gt;&gt;&gt;</div>
+  </div>
+
+  <!-- Main apology page -->
+  <div id="mainPage" class="hidden screen">
+    <div class="wrap">
+      <div class="card">
+        <h2 style="text-align:center; padding:20px;">I didn’t mean to hurt you 💔</h2>
+        <p style="padding:20px; text-align:center;">Please forgive me, Twinkle. You mean the world to me. ❤️</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create falling raindrops (sad effect = more drops + faster)
+    const container = document.getElementById("raindrops");
+    function createDrop(){
+      const drop = document.createElement("span");
+      drop.classList.add("drop");
+      drop.style.left = Math.random()*100 + "vw";
+      drop.style.animationDuration = (0.4 + Math.random()*0.5) + "s"; // faster fall
+      drop.style.height = (10 + Math.random()*15) + "px"; // varied drop length
+      container.appendChild(drop);
+      setTimeout(()=> drop.remove(), 1500);
+    }
+    setInterval(createDrop, 50); // MANY more drops
+
+    function showMain(){
+      window.location.href = "sorry 2.html";
+          }
+  </script>
+</body>
+</html>

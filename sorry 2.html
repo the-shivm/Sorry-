@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sorry Page</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+</style>
+  <style>
+  :root {
+  --ig-1: #f58529; /* orange */
+  --ig-2: #dd2a7b; /* pink */
+  --ig-3: #8134af; /* purple */
+  --ig-4: #515bd4; /* blue */
+  --ring: #ffffff40;
+  --text: #e7e9ee;
+}
+  .ig-btn {
+  --_pad-y: 14px;
+  --_pad-x: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--_pad-y) var(--_pad-x);
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  text-decoration: none;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, var(--ig-1), var(--ig-2), var(--ig-3), var(--ig-4));
+  background-size: 300% 300%;
+  box-shadow: 0 8px 24px #00000066, inset 0 1px 0 #ffffff40;
+  border: 0;
+  outline: none;
+  transition: transform .18s ease, box-shadow .18s ease;
+  will-change: transform;
+}
+.ig-btn:hover { transform: translateY(-1px) scale(1.01); box-shadow: 0 12px 28px #00000080, inset 0 1px 0 #ffffff55; }
+.ig-btn:active { transform: translateY(0) scale(.99); }
+.ig-btn:focus-visible { box-shadow: 0 0 0 4px var(--ring), 0 8px 24px #00000066; }
+
+.ig-btn .icon { width: 40px; height: 40px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ig-btn { animation: shift 6s ease-in-out infinite alternate; }
+  @keyframes shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+}
+
+.ig-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  border: 2px solid #ffffff22;
+  background: #ffffff05;
+  backdrop-filter: blur(6px);
+  transition: border-color .18s ease, transform .18s ease;
+}
+.ig-outline:hover { border-color: #ffffff44; transform: translateY(-1px); }
+.ig-outline:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--ring); }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      justify-content: flex-start;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      background: linear-gradient(135deg, #0f2027, #203a43, #444);
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100px);
+      animation: rise 0.6s forwards;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #text {
+      font-family: "Edu NSW ACT Cursive", cursive;
+      font-size: 100px;
+      margin-top: 40px;
+    }
+
+    /* translucent empty box */
+    .box {
+      font-family: "Nunito", sans-serif;
+      width: 60%;
+      min-width: 80vw;
+      min-height: 50vh;
+      border-radius: 15px;
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(6px);
+      text-align: center;
+      font-size:45px;
+      transition:transform 0.5s linear;
+      line-height: 1.6em;
+    }
+  .box:hover{
+    transform:scale(1.05);
+  }
+  </style>
+</head>
+<body>
+  <p id="text"></p>
+
+<div class="box" id="boxText"></div>
+
+  <!-- Container for raindrops -->
+  <div id="raindrops"></div>
+
+  <script>
+    function animateText(word) {
+      const container = document.getElementById("text");
+      container.innerHTML = "";
+      [...word].forEach((letter, i) => {
+        const span = document.createElement("span");
+        span.textContent = letter;
+        span.classList.add("letter");
+        span.style.animationDelay = `${i * 0.1}s`;
+        container.appendChild(span);
+      });
+    }
+
+    animateText("😭 SORRY 😭");
+
+    // Raindrop effect
+    const container = document.getElementById("raindrops");
+    function createDrop(){
+      const drop = document.createElement("span");
+      drop.classList.add("drop");
+      drop.style.left = Math.random() * 100 + "vw";
+      drop.style.animationDuration = (0.5 + Math.random() * 0.5) + "s";
+      drop.style.height = (10 + Math.random() * 15) + "px";
+      container.appendChild(drop);
+      setTimeout(() => drop.remove(), 1500);
+    }
+    setInterval(createDrop, 50);
+  </script>
+
+  <style>
+    #raindrops {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .drop {
+      position: absolute;
+      top: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.7);
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Ensure raindrops are behind text */
+    body > #raindrops {
+      z-index: 0;
+    }
+    .box, #text {
+      z-index: 2;
+      position: relative;
+    }
+  </style>
+  <!-- Forgive Me button -->
+<button id="forgiveBtn">Forgive Me ❤️</button>
+
+<style>
+  #forgiveBtn {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 28px;
+    font-family: "Nunito", sans-serif;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s, background 0.3s;
+    z-index: 2;
+    position: relative;
+    
+  }
+
+  #forgiveBtn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+  }
+  /* Floating animation */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-50px); } /* move up 20px */
+  100% { transform: translateY(0); }
+}
+
+.box {
+  font-family: "Nunito", sans-serif;
+  width: 60%;
+  min-width: 80vw;
+  min-height: 50vh;
+  border-radius: 15px;
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  text-align: center;
+  font-size: 45px;
+  transition: transform 0.5s linear;
+  line-height: 1.6em;
+  
+  /* Floating effect */
+  animation: float 4s ease-in-out infinite;
+}
+  /* Box rotation effect */
+.box.flipped {
+  transform: rotateY(180deg);
+  transition: transform 1s ease;
+}
+</style>
+<script>
+  function typeBoxText(text, elementId, speed = 50, callback) {
+  const container = document.getElementById(elementId);
+  container.innerHTML = "";
+  let i = 0;
+
+  function type() {
+    if (i < text.length) {
+      container.innerHTML += text[i];
+      i++;
+      setTimeout(type, speed);
+    } else {
+      if (callback) callback(); // <-- Call when typing is finished
+    }
+  }
+
+  type();
+}
+  const message = `Sorry, twinkle merese na bhaut bada wala galti hogya aur humko ye realise ho chuka hai ki tum sahi thi aur hum glat se lekin please yaar humko maaf krdo please ab sab normal krdo na humko pta hai ye tmhare liye bhaut hard experience rha hai  bas meri galti ki wajah se aur hum aapne dil pr hath rakh ke bolte hai ajj ke badd aisa kbhi nhi krenge please maaf krdo na ek aakhiri mauka mang rhe hai dedo na (Ye sari baat tumse tumhara purana wala SHIVAM bol rha hai) please maaf krdo last chance dedo.....  
+Tu mere liye hamesha special thi aur rahegi, aur mujhe afsos hai ki maine apne actions se tujhe khoya.  
+Bas itna yaad rakhna ki maine tujhe dil se care kiya tha. ❤️`;
+
+  typeBoxText(message, "boxText", 70,()=>{
+    const btn = document.getElementById("forgiveBtn");
+
+  btn.addEventListener("click", () => {
+  const thankYouMessage = `Thank you for forgiving me ❤️ <br><br>
+    <a class="ig-btn" href="https://www.instagram.com/the.shivm_?igsh=MXJqdHE4ZTI2azdyZA==/message" target="_blank">
+      <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.75-3a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"></path></svg>
+      the.shivm_
+    </a>`;
+
+  document.getElementById("boxText").innerHTML = thankYouMessage;
+});
+  
+  }); // speed in ms
+
+  
+    
+</script>
+</body>
+</html>
